@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 import sys
 
 # main function
@@ -13,9 +14,19 @@ def main():
   
   # create client
   client = genai.Client(api_key=api_key)
+  if len(sys.argv) <2:
+    print("I need a prompt")
+    sys.exit(1)
+    
   
+  prompt = sys.argv[1]
+  
+  messages = [
+    types.Content(role="user", parts=[types.Part(text=prompt)]),
+	]
+
   response = client.models.generate_content(
-      model="gemini-2.0-flash-001", contents="Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
+      model="gemini-2.0-flash-001", contents=messages
   )
   
   print(response.text)
@@ -25,7 +36,7 @@ def main():
     return
   print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
   print(f"Response tokens:{response.usage_metadata.candidates_token_count}" )
-  print("ARGS", sys.argv)
+  
   
 
 
