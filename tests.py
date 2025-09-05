@@ -1,24 +1,14 @@
 # from functions.get_files_info import get_files_info
-from functions.get_files_content import get_file_content
+from functions.write_file import write_file
 import os
 
-def main():   
-    # working_dir = "calculator"
-    # print(get_file_content(working_dir, "lorem.txt"))
-    # print(get_file_content("calculator", "lorem.txt"))
-    
-    result = get_file_content("calculator", "main.py")
+def main():
+    result = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
     print(result)
-    
-    result = get_file_content("calculator", "pkg/calculator.py")
+    result = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
     print(result)
-    
-    result = get_file_content("calculator", "/bin/cat") 
+    result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
     print(result)
-
-    result = get_file_content("calculator", "pkg/does_not_exist.py") 
-    print(result)
-    
     
     
 main()
